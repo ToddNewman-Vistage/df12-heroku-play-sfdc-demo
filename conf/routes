@@ -2,13 +2,12 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET     /                                          Instructions.index
+# Reports
+GET     /                                          Reports.index
+GET     /clearHistory                              Reports.clearHistory
 
-# People
-GET        /people                                 People.index
-POST       /people                                 People.create
-DELETE     /people/{id}                            People.delete
+# Synchronization
+POST    /syncContacts                              Synchronize.syncContacts
 
 # Ignore favicon requests
 GET        /favicon.ico                            404

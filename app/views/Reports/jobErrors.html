@@ -1,0 +1,30 @@
+#{extends 'main.html'/}
+
+#{if jobErrors}
+	<div class="jobErrors">    
+		<h3>Errors for Job run on ${job.whenItHappened.format('MM/dd/yyyy hh:mm')}</h3>
+
+		<table cellpadding="4" border="1">
+		<tr>
+			<th class="logTableHead">Message</th>
+		</tr>
+		#{list jobErrors, as:'err'}
+			<tr>
+				<td>
+				    ${err.errorMessage}
+				</td>
+			</tr>
+		#{/list}
+		</table>		
+
+	</div>
+
+#{/if}
+ 
+#{else}
+    <div class="empty">
+        There are no errors for this job.
+    </div>
+#{/else}
+
+<a href="@{Reports.index()}">Back to Sync History</a>

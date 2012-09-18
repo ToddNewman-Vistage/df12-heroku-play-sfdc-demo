@@ -1,0 +1,43 @@
+#{extends 'main.html'/}
+
+#{if syncJobs}
+
+	<div class="jobHistory">    
+		<h3>Salesforce-->Google Sync History</h3>
+
+		<table cellpadding="3">
+		<tr>
+			<th class="logTableHead">Run time</th>
+			<th class="logTableHead">IDs requested</th>
+			<th class="logTableHead">Success<br/>Count</th>
+			<th class="logTableHead">Error<br/>Count</th>
+		</tr>
+		#{list items:syncJobs, as:'job'}
+			<tr>
+				<td>
+				    ${job.whenItHappened.format('MM/dd/yyyy hh:mm')}
+				</td>
+				<td>
+				    ${job.ids}
+				</td>
+				<td>
+				    ${job.syncSuccessCount}
+				</td>
+				<td>
+					${job.syncErrorCount}
+					#{if job.syncErrorCount > 0} <a href="@{Reports.jobErrors(job.id)}">view...</a> #{/if}
+				</td>
+			</tr>
+		#{/list}
+		</table>
+		<br/>
+		<a href="/clearHistory">Clear Request History</a>
+	</div>
+
+#{/if}
+ 
+#{else}
+    <div class="empty">
+        There is no job history.
+    </div>
+#{/else}

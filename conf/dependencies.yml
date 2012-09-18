@@ -2,3 +2,19 @@
 
 require:
     - play
+    - local-repo -> guava 11.0.2
+    - local-repo -> jsr305 1.0
+    - local-repo -> gdata-core 1.0
+    - local-repo -> gdata-client-meta 1.0
+    - local-repo -> gdata-client 1.0
+    - local-repo -> gdata-contacts-meta 3.0
+    - local-repo -> gdata-contacts 3.0
+
+# My custom repositories
+repositories:
+
+    - local-google-repo:
+        type:       http
+        artifact:   "file://${application.path}/local-google-repo/[module]-[revision].[ext]"
+        contains:
+            - local-repo -> *

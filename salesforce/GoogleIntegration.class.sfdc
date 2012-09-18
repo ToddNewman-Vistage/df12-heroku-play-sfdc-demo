@@ -1,0 +1,29 @@
+global class GoogleIntegration {
+
+	public static String SERVICE_URL_ROOT = 'https://yourapp.herokuapp.com';
+
+	@future (callout=true)
+	public static void updateGoogleContacts(Set<ID> contactIds) {
+
+		if (contactIds.size() < 1) return;
+
+		String parsedContactIds = '';
+		for (ID i : contactIds) {
+				parsedContactIds += i + ',';
+		}
+		parsedContactIds = parsedContactIds.substring(0, parsedContactIds.length()-1);
+
+		// create the http Request
+		HttpRequest req = new HttpRequest();
+		req.setEndpoint(SERVICE_URL_ROOT + '/syncContacts');
+		req.setMethod('POST');
+		req.setHeader('ids', parsedContactIds);
+
+		// Send the request
+		HttpResponse res;
+		Http h = new Http();
+		res = h.send(req);
+
+	}
+
+}

@@ -1,0 +1,15 @@
+trigger Contact_AfterInsertUpdate on Contact (after insert, after update) {
+
+	Set<ID> contactsToSync = new Set<ID>();
+
+	for (Contact c : Trigger.new) {
+		if (true) { // if values I care about were updated
+			contactsToSync.add(c.Id);
+		}
+	}
+
+	if (contactsToSync.size() > 0) {
+		GoogleIntegration.updateGoogleContacts(contactsToSync);
+	}
+
+}
